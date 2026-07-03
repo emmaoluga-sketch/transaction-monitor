@@ -392,6 +392,6 @@ This project is created for assessment purposes only. All rights reserved.
 
 ---
 
-**Built with ❤️ by [Your Name]**
+**Built with ❤️ by Emmanuel Abayomi Oluga**
 
 **Last Updated: July 2026**
