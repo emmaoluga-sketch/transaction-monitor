@@ -381,8 +381,8 @@ Cmd + Shift + R (Mac)
 ## 📞 Support
 
 For issues, questions, or contributions:
-- **Email:** your-email@example.com
-- **GitHub Issues:** https://github.com/yourusername/transaction-monitor/issues
+- **Email:** abayo172000@gmail.com
+- **GitHub Issues:** https://github.com/emmaoluga-sketch/transaction-monitor/issues
 
 ---
 
