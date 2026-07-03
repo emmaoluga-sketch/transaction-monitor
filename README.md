@@ -152,7 +152,7 @@ SmartComply is a **Transaction Monitoring Platform** designed to detect suspicio
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/transaction-monitor.git
+git clone https://github.com/emmaoluga-sketch/transaction-monitor.git
 cd transaction-monitor
 
 # 2. Create environment file
