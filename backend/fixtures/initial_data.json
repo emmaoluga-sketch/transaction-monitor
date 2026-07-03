@@ -1,0 +1,16 @@
+[
+  {
+    "model": "customers.customer",
+    "pk": 1,
+    "fields": {
+      "name": "Demo Customer",
+      "email": "demo@example.com",
+      "phone": "1234567890",
+      "address": "123 Demo St",
+      "country": "USA",
+      "is_high_risk": false,
+      "created_at": "2026-07-03T00:00:00Z",
+      "updated_at": "2026-07-03T00:00:00Z"
+    }
+  }
+]
