@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
 from customers.models import Customer
-from .models import Transaction
+from transactions.models import Transaction 
 
 class TransactionAPITests(TestCase):
     def setUp(self):

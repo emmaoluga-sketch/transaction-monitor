@@ -3,13 +3,13 @@ from django.utils import timezone
 from datetime import timedelta
 from customers.models import Customer
 from transactions.models import Transaction
-from .rules import (
+from rules.rules import (
     HighAmountRule,
     FrequentTransactionsRule,
     BlacklistedCountryRule,
     HighRiskCustomerRule
 )
-from .engine import RuleEngine
+from rules.engine import RuleEngine
 
 
 class RuleTests(TestCase):

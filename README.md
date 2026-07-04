@@ -41,7 +41,7 @@ SmartComply is a **Transaction Monitoring Platform** designed to detect suspicio
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐          │
 │  │   Frontend   │    │   Backend    │    │   Consumer   │          │
 │  │   React + TS │───▶│ Django + DRF │───▶│   (Worker)   │          │
-│  │   Port: 3000 │    │   Port: 8000 │    │   (Async)    │          │
+│  │   Port: 80   │    │   Port: 8000 │    │   (Async)    │          │
 │  └──────────────┘    └──────────────┘    └──────────────┘          │
 │                              │                │                     │
 │                              ▼                ▼                     │
@@ -152,7 +152,7 @@ SmartComply is a **Transaction Monitoring Platform** designed to detect suspicio
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/transaction-monitor.git
+git clone https://github.com/emmaoluga-sketch/transaction-monitor.git
 cd transaction-monitor
 
 # 2. Create environment file
@@ -165,7 +165,8 @@ docker compose up --build
 ### Access the app:
 | Service | URL |
 |---------|-----|
-| Frontend | http://localhost:3000 |
+| Frontend (Docker) | http://localhost |
+| Frontend (local dev) | http://localhost:3000 |
 | Backend API | http://localhost:8000/api/v1/ |
 | API Docs (Swagger) | http://localhost:8000/api/v1/docs/ |
 | Health Check | http://localhost:8000/health/ |
@@ -244,9 +245,9 @@ GET /api/v1/alerts/?transaction=1
 
 ## 🧪 Testing
 
-### Run All Tests
+### Run All Tests (Recommended)
 ```bash
-docker compose exec backend python manage.py test
+docker compose exec backend python manage.py test apps.customers.tests apps.transactions.tests apps.rules.tests apps.users.tests
 ```
 
 ### Run Specific Test Suite
@@ -254,6 +255,11 @@ docker compose exec backend python manage.py test
 docker compose exec backend python manage.py test apps.customers.tests
 docker compose exec backend python manage.py test apps.transactions.tests
 docker compose exec backend python manage.py test apps.rules.tests
+```
+
+### Alternative: Use Python unittest
+```bash
+docker compose exec backend python -m unittest discover -s apps -p "tests.py" -v
 ```
 
 ### Test Coverage (Approximate)
@@ -381,8 +387,8 @@ Cmd + Shift + R (Mac)
 ## 📞 Support
 
 For issues, questions, or contributions:
-- **Email:** your-email@example.com
-- **GitHub Issues:** https://github.com/yourusername/transaction-monitor/issues
+- **Email:** abayo172000@gmail.com
+- **GitHub Issues:** https://github.com/emmaoluga-sketch/transaction-monitor/issues
 
 ---
 
@@ -392,6 +398,6 @@ This project is created for assessment purposes only. All rights reserved.
 
 ---
 
-**Built with ❤️ by [Your Name]**
+**Built with ❤️ by Emmanuel Abayomi Oluga**
 
 **Last Updated: July 2026**

@@ -164,3 +164,5 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+TEST_RUNNER = 'test_runner.CustomTestRunner'

@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 import os
 import sys
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')

@@ -1,5 +1,5 @@
 from django.db import models
-from django.apps import apps
+from transactions.models import Transaction
 
 class Alert(models.Model):
     SEVERITY_CHOICES = (
@@ -8,12 +8,7 @@ class Alert(models.Model):
         ('HIGH', 'High'),
     )
     
-    # Use apps.get_model() instead of importing directly
-    transaction = models.ForeignKey(
-        'transactions.Transaction',  # <-- THIS IS THE FIX
-        on_delete=models.CASCADE,
-        related_name='alerts'
-    )
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE, related_name='alerts')
     rule_name = models.CharField(max_length=100)
     message = models.TextField()
     severity = models.CharField(max_length=20, choices=SEVERITY_CHOICES, default='MEDIUM')
@@ -21,6 +16,7 @@ class Alert(models.Model):
     resolved = models.BooleanField(default=False)
 
     class Meta:
+        app_label = 'alerts'  # <-- ADD THIS
         indexes = [
             models.Index(fields=['transaction', 'created_at']),
             models.Index(fields=['resolved']),
