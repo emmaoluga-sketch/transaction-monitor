@@ -16,7 +16,6 @@ class Alert(models.Model):
     resolved = models.BooleanField(default=False)
 
     class Meta:
-        app_label = 'alerts'  # <-- ADD THIS
         indexes = [
             models.Index(fields=['transaction', 'created_at']),
             models.Index(fields=['resolved']),

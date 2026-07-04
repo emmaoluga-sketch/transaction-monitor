@@ -12,7 +12,6 @@ class AuditLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        app_label = 'audits'
         indexes = [
             models.Index(fields=['transaction', 'created_at']),
             models.Index(fields=['action']),

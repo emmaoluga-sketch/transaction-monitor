@@ -146,7 +146,6 @@ SmartComply is a **Transaction Monitoring Platform** designed to detect suspicio
 ### Prerequisites
 - Docker & Docker Compose
 - Git
-- Node.js 18+ (optional, for local frontend development)
 
 ### Quick Start (Recommended)
 
@@ -166,7 +165,7 @@ docker compose up --build
 | Service | URL |
 |---------|-----|
 | Frontend (Docker) | http://localhost |
-| Frontend (local dev) | http://localhost:3000 |
+| Frontend (local dev) | http://localhost:3000 or 3001 |
 | Backend API | http://localhost:8000/api/v1/ |
 | API Docs (Swagger) | http://localhost:8000/api/v1/docs/ |
 | Health Check | http://localhost:8000/health/ |
@@ -380,6 +379,59 @@ docker compose up -d consumer
 # Hard refresh browser
 Ctrl + Shift + R (Windows)
 Cmd + Shift + R (Mac)
+```
+
+**5. Transactions show 0% risk score**
+```bash
+# Manually process all pending transactions
+docker compose exec backend python manage.py shell -c "
+from transactions.models import Transaction
+from rules.engine import RuleEngine
+from alerts.models import Alert
+from audits.models import AuditLog
+
+for t in Transaction.objects.filter(risk_score=0):
+    risk, alerts = RuleEngine.evaluate(t)
+    t.risk_score = min(100, t.risk_score + risk)
+    t.save()
+    AuditLog.objects.create(
+        transaction=t,
+        action='MANUAL_PROCESSING',
+        details={
+            'risk_increment': risk,
+            'alerts_created': [{'id': a.id, 'rule': a.rule_name} for a in alerts],
+        },
+        user=None,
+    )
+    print(f'✅ {t.reference}: Risk={t.risk_score}, Alerts={len(alerts)}')
+"
+```
+
+**6. Login fails with "Invalid username or password"**
+```bash
+# Create a superuser
+docker compose exec backend python manage.py createsuperuser
+```
+
+**7. CORS errors (frontend cannot reach backend)**
+
+Ensure `VITE_API_URL` in `frontend/.env` is correct:
+```env
+VITE_API_URL=http://localhost:8000/api/v1
+```
+
+If you're running frontend on a different port (e.g., 3001), add it to `CORS_ALLOWED_ORIGINS` in `backend/config/settings.py`:
+```python
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost",
+]
+```
+
+Then restart the backend:
+```bash
+docker compose restart backend
 ```
 
 ---

@@ -11,7 +11,6 @@ class Customer(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        app_label = 'customers'  # <-- ADD THIS
         indexes = [
             models.Index(fields=['email']),
             models.Index(fields=['country']),
